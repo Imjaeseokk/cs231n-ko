@@ -18,11 +18,7 @@ This is an introductory lecture designed to introduce people from outside of Com
 
 ## Image Classification
 
-**Motivation**. 이 섹션에서는 Image Classification 문제를 소개한다. Image Classification은 입력 이미지 하나에 대해, 미리 정해진 category 집합 중 하나의 label을 할당하는 task이다.
-
-이는 Computer Vision의 핵심 문제 중 하나이며, 겉보기에는 단순하지만 매우 다양한 실제 응용 분야를 가진다.
-
-또한 이 강의의 뒤에서 살펴보겠지만, object detection이나 segmentation처럼 겉보기에는 서로 다른 Computer Vision task들도 상당 부분 Image Classification 문제로 환원될 수 있다.
+**Motivation**. 이 섹션에서는 Image Classification 문제를 소개한다. Image Classification은 입력 이미지 하나에 대해, 미리 정해진 category 집합 중 하나의 label을 할당하는 task이다.이는 Computer Vision의 핵심 문제 중 하나이며, 겉보기에는 단순하지만 매우 다양한 실제 응용 분야를 가진다.또한 이 강의의 뒤에서 살펴보겠지만, object detection이나 segmentation처럼 겉보기에는 서로 다른 Computer Vision task들도 상당 부분 Image Classification 문제로 환원될 수 있다.
 
 **Example**. For example, in the image below an image classification model takes a single image and assigns probabilities to 4 labels, *{cat, dog, hat, mug}*. As shown in the image, keep in mind that to a computer an image is represented as one large 3-dimensional array of numbers. In this example, the cat image is 248 pixels wide, 400 pixels tall, and has three color channels Red,Green,Blue (or RGB for short). Therefore, the image consists of 248 x 400 x 3 numbers, or a total of 297,600 numbers. Each number is an integer that ranges from 0 (black) to 255 (white). Our task is to turn this quarter of a million numbers into a single label, such as *"cat"*.
 
