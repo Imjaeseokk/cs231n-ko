@@ -18,9 +18,14 @@ This is an introductory lecture designed to introduce people from outside of Com
 
 ## Image Classification
 
-**Motivation**. 이 섹션에서는 Image Classification 문제를 소개한다. Image Classification은 입력 이미지 하나에 대해, 미리 정해진 category 집합 중 하나의 label을 할당하는 task이다.이는 Computer Vision의 핵심 문제 중 하나이며, 겉보기에는 단순하지만 매우 다양한 실제 응용 분야를 가진다.또한 이 강의의 뒤에서 살펴보겠지만, object detection이나 segmentation처럼 겉보기에는 서로 다른 Computer Vision task들도 상당 부분 Image Classification 문제로 환원될 수 있다.
+**Motivation**. 이 섹션에서는 Image Classification 문제를 소개한다. Image Classification은 입력 이미지 하나에 대해, 미리 정해진 category 집합 중 하나의 label을 할당하는 task이다.이는 Computer Vision의 핵심 문제 중 하나이며, 겉보기에는 단순하지만 매우 다양한 실제 응용 분야를 가진다. 또한 이 강의의 뒤에서 살펴보겠지만, object detection이나 segmentation처럼 겉보기에는 서로 다른 Computer Vision task들도 결국 Image Classification 문제의 형태로 다룰 수 있다.
 
-**Example**. For example, in the image below an image classification model takes a single image and assigns probabilities to 4 labels, *{cat, dog, hat, mug}*. As shown in the image, keep in mind that to a computer an image is represented as one large 3-dimensional array of numbers. In this example, the cat image is 248 pixels wide, 400 pixels tall, and has three color channels Red,Green,Blue (or RGB for short). Therefore, the image consists of 248 x 400 x 3 numbers, or a total of 297,600 numbers. Each number is an integer that ranges from 0 (black) to 255 (white). Our task is to turn this quarter of a million numbers into a single label, such as *"cat"*.
+**Example**. 예를 들어, 아래 그림에서 Image Classification model은 하나의 이미지를 입력으로 받아, *{cat, dog, hat, mug}* 네 개의 label 각각에 대한 probability를 출력한다.
+그림에서 볼 수 있듯이, 컴퓨터 입장에서 image는 숫자로 이루어진 하나의 거대한 3-dimensional array로 표현된다는 점을 기억해야 한다. 이 예시에서 고양이 이미지는 가로 248 pixels, 세로 400 pixels이며, Red, Green, Blue, 줄여서 RGB라고 하는 세 개의 color channel을 가진다. 따라서 이 image는 248 x 400 x 3개의 숫자, 즉 총 297,600개의 숫자로 구성된다.
+각 숫자는 0에서 255 사이의 integer이며, 값이 0이면 검정에, 255이면 흰색에 해당한다.
+우리의 task는 약 30만 개에 가까운 이 숫자들을 *"cat"*과 같은 하나의 label로 변환하는 것이다.
+
+
 
 <div class="fig figcenter fighighlight">
   <img src="/assets/classify.png">
