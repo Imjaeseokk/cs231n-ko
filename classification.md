@@ -29,7 +29,7 @@ This is an introductory lecture designed to introduce people from outside of Com
 
 <div class="fig figcenter fighighlight">
   <img src="{{ site.baseurl }}/assets/classify.png">
-  <div class="figcaption">The task in Image Classification is to predict a single label (or a distribution over labels as shown here to indicate our confidence) for a given image. Images are 3-dimensional arrays of integers from 0 to 255, of size Width x Height x 3. The 3 represents the three color channels Red, Green, Blue.</div>
+  <div class="figcaption">Image Classification의 task는 주어진 image에 대해 하나의 label을 예측하는 것이다. 또는 여기서처럼 모델의 confidence를 나타내기 위해 여러 label에 대한 probability distribution을 예측할 수도 있다.Image는 0부터 255 사이의 integer로 이루어진 3-dimensional array이며, 그 크기는 Width x Height x 3이다.여기서 3은 Red, Green, Blue로 이루어진 세 개의 color channel을 의미한다.</div>
 </div>
 
 **Challenges**. Since this task of recognizing a visual concept (e.g. cat) is relatively trivial for a human to perform, it is worth considering the challenges involved from the perspective of a Computer Vision algorithm. As we present (an inexhaustive) list of challenges below, keep in mind the raw representation of images as a 3-D array of brightness values:
