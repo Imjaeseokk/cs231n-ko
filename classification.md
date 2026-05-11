@@ -32,7 +32,7 @@ This is an introductory lecture designed to introduce people from outside of Com
   <div class="figcaption">Image Classification의 task는 주어진 image에 대해 하나의 label을 예측하는 것이다. 또는 여기서처럼 모델의 confidence를 나타내기 위해 여러 label에 대한 probability distribution을 예측할 수도 있다.Image는 0부터 255 사이의 integer로 이루어진 3-dimensional array이며, 그 크기는 Width x Height x 3이다.여기서 3은 Red, Green, Blue로 이루어진 세 개의 color channel을 의미한다.</div>
 </div>
 
-**Challenges**. visual concept("고양이"같은)를 인식하는 일은 사람에게는 비교적 쉬운 task이다. 하지만 Computer Vision algorithm의 관점에서 보면, 이 task에 어떤 어려움이 있는지 생각해볼 필요가 있다.
+**Challenges**. Visual concept("고양이"같은)을 인식하는 일은 사람에게는 비교적 쉬운 task이다. 하지만 Computer Vision algorithm의 관점에서 보면, 이 task에 어떤 어려움이 있는지 생각해볼 필요가 있다.
 아래에서 여러 challenge들을 살펴볼 텐데, 이때 image의 raw representation이 brightness value로 이루어진 3-D array라는 점을 기억해야 한다:
 
 - **Viewpoint variation**. A single instance of an object can be oriented in many ways with respect to the camera.
