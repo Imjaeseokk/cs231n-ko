@@ -36,7 +36,7 @@ This is an introductory lecture designed to introduce people from outside of Com
 아래에서 여러 challenge들을 살펴볼 텐데, 이때 image의 raw representation이 brightness value로 이루어진 3-D array라는 점을 기억해야 한다:
 
 - **Viewpoint variation**. 동일한 object의 instance라도 카메라에 대해 어떤 방향으로 놓여 있는지에 따라 다양하게 보일 수 있다.
-- **Scale variation**. Visual classes often exhibit variation in their size (size in the real world, not only in terms of their extent in the image).
+- **Scale variation**. 같은 visual class에 속하는 object들도 크기가 다양하게 나타날 수 있다. 이때 크기는 이미지 안에서 얼마나 크게 보이는지를 말하는 것뿐 아니라, 실제 세계에서의 물리적인 크기도 포함한다.
 - **Deformation**. Many objects of interest are not rigid bodies and can be deformed in extreme ways.
 - **Occlusion**. The objects of interest can be occluded. Sometimes only a small portion of an object (as little as few pixels) could be visible.
 - **Illumination conditions**. The effects of illumination are drastic on the pixel level.
