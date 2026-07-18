@@ -61,10 +61,12 @@ This is an introductory lecture designed to introduce people from outside of Com
 
 <div class="fig figcenter fighighlight">
   <img src="{{ site.baseurl }}/assets/trainset.jpg">
-  <div class="figcaption">An example training set for four visual categories. In practice we may have thousands of categories and hundreds of thousands of images for each category.</div>
+  <div class="figcaption">아래는 네 개의 visual category로 구성된 training set의 예시이다. 실제로는 수천 개의 category를 다루고, 각 category마다 수십만 장의 image를 사용할 수도 있다.</div>
 </div>
 
-**The image classification pipeline**. We've seen that the task in Image Classification is to take an array of pixels that represents a single image and assign a label to it. Our complete pipeline can be formalized as follows:
+**The image classification pipeline**. 지금까지 우리는 Image Classification이 하나의 image를 표현하는 pixel array를 입력으로 받아, 해당 image에 하나의 label을 할당하는 task라는 것을 살펴보았다.
+
+전체 pipeline은 다음과 같이 정리할 수 있다.
 
 - **Input:** Our input consists of a set of *N* images, each labeled with one of *K* different classes. We refer to this data as the *training set*.
 - **Learning:** Our task is to use the training set to learn what every one of the classes looks like. We refer to this step as *training a classifier*, or *learning a model*.
