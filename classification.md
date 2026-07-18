@@ -37,13 +37,15 @@ This is an introductory lecture designed to introduce people from outside of Com
 
 - **Viewpoint variation**. 동일한 object의 instance라도 카메라에 대해 어떤 방향으로 놓여 있는지에 따라 다양하게 보일 수 있다.
 - **Scale variation**. 같은 visual class에 속하는 object들도 크기가 다양하게 나타날 수 있다. 이때 크기는 이미지 안에서 얼마나 크게 보이는지를 말하는 것뿐 아니라, 실제 세계에서의 물리적인 크기도 포함한다.
-- **Deformation**. Many objects of interest are not rigid bodies and can be deformed in extreme ways.
-- **Occlusion**. The objects of interest can be occluded. Sometimes only a small portion of an object (as little as few pixels) could be visible.
-- **Illumination conditions**. The effects of illumination are drastic on the pixel level.
-- **Background clutter**. The objects of interest may *blend* into their environment, making them hard to identify.
-- **Intra-class variation**. The classes of interest can often be relatively broad, such as *chair*. There are many different types of these objects, each with their own appearance.
+- **Deformation**. 우리가 관심을 두는 많은 object들은 rigid body가 아니기 때문에, 매우 다양한 방식으로 형태가 변할 수 있다.
+- **Occlusion**. 우리가 인식하려는 object는 다른 물체에 의해 일부 또는 대부분이 가려질 수 있다.
+때로는 object의 극히 작은 부분만 보일 수도 있으며, 심한 경우에는 몇 개의 pixel만 보일 수도 있다.
+- **Illumination conditions**. 조명 조건의 영향은 pixel level에서 매우 크게 나타난다.
+- **Background clutter**. Object가 주변 환경이나 복잡한 배경에 섞여 들어가 식별하기 어려워질 수 있다.
+- **Intra-class variation**. 우리가 다루려는 class는 *chair*처럼 비교적 넓은 범위를 포함하는 경우가 많다.
+이러한 object들에는 여러 종류가 있으며, 각각 고유한 appearance를 가진다.
 
-A good image classification model must be invariant to the cross product of all these variations, while simultaneously retaining sensitivity to the inter-class variations.
+좋은 Image Classification model은 앞서 살펴본 다양한 변화들이 여러 방식으로 동시에 나타나더라도 같은 class로 인식할 수 있어야 한다. 동시에 서로 다른 class를 구분해내는 차이에는 민감하게 반응해야 한다.
 
 <div class="fig figcenter fighighlight">
   <img src="{{ site.baseurl }}/assets/challenges.jpeg">
