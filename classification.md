@@ -52,7 +52,12 @@ This is an introductory lecture designed to introduce people from outside of Com
   <div class="figcaption"></div>
 </div>
 
-**Data-driven approach**. How might we go about writing an algorithm that can classify images into distinct categories? Unlike writing an algorithm for, for example, sorting a list of numbers, it is not obvious how one might write an algorithm for identifying cats in images. Therefore, instead of trying to specify what every one of the categories of interest look like directly in code, the approach that we will take is not unlike one you would take with a child: we're going to provide the computer with many examples of each class and then develop learning algorithms that look at these examples and learn about the visual appearance of each class. This approach is referred to as a *data-driven approach*, since it relies on first accumulating a *training dataset* of labeled images. Here is an example of what such a dataset might look like:
+**Data-driven approach**. Image를 서로 다른 category로 분류하는 algorithm을 어떻게 만들 수 있을까?
+예를 들어 숫자 list를 정렬하는 algorithm을 작성하는 경우와는 달리, image 속의 고양이를 식별하는 algorithm을 어떻게 작성해야 하는지는 명확하지 않다.
+그러므로 우리가 관심있는 각 category가 어떻게 생겼는지를 code에 직접 명시하려고 하기보다는, 
+아이를 가르칠 때와 다르지 않은 접근법을 사용할 것이다. 즉, 컴퓨터에게 각 class의 예시들을 많이 보여주고, learning algorithm이 이 예시들을 살펴보면서 각 class의 visual appearance를 학습하도록 만들것이다.
+이 접근법은 *data-driven approach*라고 부른다. 먼저 labeled image로 이루어진 *training dataset*을 모으는 것에 기반하기 때문이다.
+아래는 이러한 dataset이 어떻게 생겼는지 보여주는 예시이다.
 
 <div class="fig figcenter fighighlight">
   <img src="{{ site.baseurl }}/assets/trainset.jpg">
