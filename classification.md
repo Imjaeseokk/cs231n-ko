@@ -20,12 +20,10 @@ This is an introductory lecture designed to introduce people from outside of Com
 
 **Motivation**. 이 섹션에서는 Image Classification 문제를 소개한다. Image Classification은 입력 이미지 하나에 대해, 미리 정해진 category 집합 중 하나의 label을 할당하는 task이다.이는 Computer Vision의 핵심 문제 중 하나이며, 겉보기에는 단순하지만 매우 다양한 실제 응용 분야를 가진다. 또한 이 강의의 뒤에서 살펴보겠지만, object detection이나 segmentation처럼 겉보기에는 서로 다른 Computer Vision task들도 결국 Image Classification 문제의 형태로 다룰 수 있다.
 
-**Example**. 예를 들어, 아래 그림에서 Image Classification model은 하나의 이미지를 입력으로 받아, *{cat, dog, hat, mug}* 네 개의 label 각각에 대한 probability를 출력한다.
+**Example**. 예를 들어, 아래 그림에서 Image Classification model은 하나의 이미지를 입력으로 받아, _{cat, dog, hat, mug}_ 네 개의 label 각각에 대한 probability를 출력한다.
 그림에서 볼 수 있듯이, 컴퓨터 입장에서 image는 숫자로 이루어진 하나의 거대한 3-dimensional array로 표현된다는 점을 기억해야 한다. 이 예시에서 고양이 이미지는 가로 248 pixels, 세로 400 pixels이며, Red, Green, Blue, 줄여서 RGB라고 하는 세 개의 color channel을 가진다. 따라서 이 image는 248 x 400 x 3개의 숫자, 즉 총 297,600개의 숫자로 구성된다.
 각 숫자는 0에서 255 사이의 integer이며, 값이 0이면 검정에, 255이면 흰색에 해당한다.
 우리의 task는 약 30만 개에 가까운 이 숫자들을 *"cat"*과 같은 하나의 label로 변환하는 것이다.
-
-
 
 <div class="fig figcenter fighighlight">
   <img src="{{ site.baseurl }}/assets/classify.png">
@@ -39,11 +37,11 @@ This is an introductory lecture designed to introduce people from outside of Com
 - **Scale variation**. 같은 visual class에 속하는 object들도 크기가 다양하게 나타날 수 있다. 이때 크기는 이미지 안에서 얼마나 크게 보이는지를 말하는 것뿐 아니라, 실제 세계에서의 물리적인 크기도 포함한다.
 - **Deformation**. 우리가 관심을 두는 많은 object들은 rigid body가 아니기 때문에, 매우 다양한 방식으로 형태가 변할 수 있다.
 - **Occlusion**. 우리가 인식하려는 object는 다른 물체에 의해 일부 또는 대부분이 가려질 수 있다.
-때로는 object의 극히 작은 부분만 보일 수도 있으며, 심한 경우에는 몇 개의 pixel만 보일 수도 있다.
+  때로는 object의 극히 작은 부분만 보일 수도 있으며, 심한 경우에는 몇 개의 pixel만 보일 수도 있다.
 - **Illumination conditions**. 조명 조건의 영향은 pixel level에서 매우 크게 나타난다.
 - **Background clutter**. Object가 주변 환경이나 복잡한 배경에 섞여 들어가 식별하기 어려워질 수 있다.
 - **Intra-class variation**. 우리가 다루려는 class는 *chair*처럼 비교적 넓은 범위를 포함하는 경우가 많다.
-이러한 object들에는 여러 종류가 있으며, 각각 고유한 appearance를 가진다.
+  이러한 object들에는 여러 종류가 있으며, 각각 고유한 appearance를 가진다.
 
 좋은 Image Classification model은 앞서 살펴본 다양한 변화들이 여러 방식으로 동시에 나타나더라도 같은 class로 인식할 수 있어야 한다. 동시에 서로 다른 class를 구분해내는 차이에는 민감하게 반응해야 한다.
 
@@ -54,7 +52,7 @@ This is an introductory lecture designed to introduce people from outside of Com
 
 **Data-driven approach**. Image를 서로 다른 category로 분류하는 algorithm을 어떻게 만들 수 있을까?
 예를 들어 숫자 list를 정렬하는 algorithm을 작성하는 경우와는 달리, image 속의 고양이를 식별하는 algorithm을 어떻게 작성해야 하는지는 명확하지 않다.
-그러므로 우리가 관심있는 각 category가 어떻게 생겼는지를 code에 직접 명시하려고 하기보다는, 
+그러므로 우리가 관심있는 각 category가 어떻게 생겼는지를 code에 직접 명시하려고 하기보다는,
 아이를 가르칠 때와 다르지 않은 접근법을 사용할 것이다. 즉, 컴퓨터에게 각 class의 예시들을 많이 보여주고, learning algorithm이 이 예시들을 살펴보면서 각 class의 visual appearance를 학습하도록 만들것이다.
 이 접근법은 *data-driven approach*라고 부른다. 먼저 labeled image로 이루어진 *training dataset*을 모으는 것에 기반하기 때문이다.
 아래는 이러한 dataset이 어떻게 생겼는지 보여주는 예시이다.
@@ -68,16 +66,17 @@ This is an introductory lecture designed to introduce people from outside of Com
 
 전체 pipeline은 다음과 같이 정리할 수 있다.
 
-- **Input:** Our input consists of a set of *N* images, each labeled with one of *K* different classes. We refer to this data as the *training set*.
-- **Learning:** Our task is to use the training set to learn what every one of the classes looks like. We refer to this step as *training a classifier*, or *learning a model*.
-- **Evaluation:** In the end, we evaluate the quality of the classifier by asking it to predict labels for a new set of images that it has never seen before. We will then compare the true labels of these images to the ones predicted by the classifier. Intuitively, we're hoping that a lot of the predictions match up with the true answers  (which we call the *ground truth*).
+- **Input:** 입력으로는 *N*개의 image로 구성된 dataset이 주어진다. 각 image는 *K*개의 서로 다른 class 중 하나의 label을 가지고 있으며, 우리는 이 data를 *training set*이라고 부른다.
+- **Learning:** 이 단계의 목표는 training set을 이용해 각 class의 visual appearance를 학습하는 것이다. 우리는 이 과정을 *classifier를 training*한다, 또는 *model을 learning*한다고 부른다.
+- **Evaluation:** 마지막으로, classifier에게 이전에 본 적 없는 새로운 image set의 label을 예측하게 하여 성능을 평가한다. 이후 각 image의 true label과 classifier가 예측한 label을 비교한다. 직관적으로는 많은 prediction이 실제 정답, 즉 *ground truth*와 일치하기를 기대한다.
 
 <a name='nn'></a>
 
 ### Nearest Neighbor Classifier
+
 As our first approach, we will develop what we call a **Nearest Neighbor Classifier**. This classifier has nothing to do with Convolutional Neural Networks and it is very rarely used in practice, but it will allow us to get an idea about the basic approach to an image classification problem.
 
-**Example image classification dataset: CIFAR-10.** One popular toy image classification dataset is the <a href="https://www.cs.toronto.edu/~kriz/cifar.html">CIFAR-10 dataset</a>. This dataset consists of 60,000 tiny images that are 32 pixels high and wide. Each image is labeled with one of 10 classes (for example *"airplane, automobile, bird, etc"*). These 60,000 images are partitioned into a training set of 50,000 images and a test set of 10,000 images. In the image below you can see 10 random example images from each one of the 10 classes:
+**Example image classification dataset: CIFAR-10.** One popular toy image classification dataset is the <a href="https://www.cs.toronto.edu/~kriz/cifar.html">CIFAR-10 dataset</a>. This dataset consists of 60,000 tiny images that are 32 pixels high and wide. Each image is labeled with one of 10 classes (for example _"airplane, automobile, bird, etc"_). These 60,000 images are partitioned into a training set of 50,000 images and a test set of 10,000 images. In the image below you can see 10 random example images from each one of the 10 classes:
 
 <div class="fig figcenter fighighlight">
   <img src="{{ site.baseurl }}/assets/nn.jpg">
@@ -166,7 +165,7 @@ In other words we would be computing the pixelwise difference as before, but thi
 distances = np.sqrt(np.sum(np.square(self.Xtr - X[i,:]), axis = 1))
 ```
 
-Note that I included the `np.sqrt` call above, but in a practical nearest neighbor application we could leave out the square root operation because square root is a *monotonic function*. That is, it scales the absolute sizes of the distances but it preserves the ordering, so the nearest neighbors with or without it are identical. If you ran the Nearest Neighbor classifier on CIFAR-10 with this distance, you would obtain **35.4%** accuracy (slightly lower than our L1 distance result).
+Note that I included the `np.sqrt` call above, but in a practical nearest neighbor application we could leave out the square root operation because square root is a _monotonic function_. That is, it scales the absolute sizes of the distances but it preserves the ordering, so the nearest neighbors with or without it are identical. If you ran the Nearest Neighbor classifier on CIFAR-10 with this distance, you would obtain **35.4%** accuracy (slightly lower than our L1 distance result).
 
 **L1 vs. L2.** It is interesting to consider differences between the two metrics. In particular, the L2 distance is much more unforgiving than the L1 distance when it comes to differences between two vectors. That is, the L2 distance prefers many medium disagreements to one big one. L1 and L2 distances (or equivalently the L1/L2 norms of the differences between a pair of images) are the most commonly used special cases of a [p-norm](https://planetmath.org/vectorpnorm).
 
@@ -174,20 +173,20 @@ Note that I included the `np.sqrt` call above, but in a practical nearest neighb
 
 ### k - Nearest Neighbor Classifier
 
-You may have noticed that it is strange to only use the label of the nearest image when we wish to make a prediction. Indeed, it is almost always the case that one can do better by using what's called a **k-Nearest Neighbor Classifier**. The idea is very simple: instead of finding the single closest image in the training set, we will find the top **k** closest images, and have them vote on the label of the test image. In particular, when *k = 1*, we recover the Nearest Neighbor classifier. Intuitively, higher values of **k** have a smoothing effect that makes the classifier more resistant to outliers:
+You may have noticed that it is strange to only use the label of the nearest image when we wish to make a prediction. Indeed, it is almost always the case that one can do better by using what's called a **k-Nearest Neighbor Classifier**. The idea is very simple: instead of finding the single closest image in the training set, we will find the top **k** closest images, and have them vote on the label of the test image. In particular, when _k = 1_, we recover the Nearest Neighbor classifier. Intuitively, higher values of **k** have a smoothing effect that makes the classifier more resistant to outliers:
 
 <div class="fig figcenter fighighlight">
   <img src="{{ site.baseurl }}/assets/knn.jpeg">
   <div class="figcaption">An example of the difference between Nearest Neighbor and a 5-Nearest Neighbor classifier, using 2-dimensional points and 3 classes (red, blue, green). The colored regions show the <b>decision boundaries</b> induced by the classifier with an L2 distance. The white regions show points that are ambiguously classified (i.e. class votes are tied for at least two classes). Notice that in the case of a NN classifier, outlier datapoints (e.g. green point in the middle of a cloud of blue points) create small islands of likely incorrect predictions, while the 5-NN classifier smooths over these irregularities, likely leading to better <b>generalization</b> on the test data (not shown). Also note that the gray regions in the 5-NN image are caused by ties in the votes among the nearest neighbors (e.g. 2 neighbors are red, next two neighbors are blue, last neighbor is green).</div>
 </div>
 
-In practice, you will almost always want to use k-Nearest Neighbor. But what value of *k* should you use? We turn to this problem next.
+In practice, you will almost always want to use k-Nearest Neighbor. But what value of _k_ should you use? We turn to this problem next.
 
 <a name='val'></a>
 
 ### Validation sets for Hyperparameter tuning
 
-The k-nearest neighbor classifier requires a setting for *k*. But what number works best? Additionally, we saw that there are many different distance functions we could have used: L1 norm, L2 norm, there are many other choices we didn't even consider (e.g. dot products). These choices are called **hyperparameters** and they come up very often in the design of many Machine Learning algorithms that learn from data. It's often not obvious what values/settings one should choose.
+The k-nearest neighbor classifier requires a setting for _k_. But what number works best? Additionally, we saw that there are many different distance functions we could have used: L1 norm, L2 norm, there are many other choices we didn't even consider (e.g. dot products). These choices are called **hyperparameters** and they come up very often in the design of many Machine Learning algorithms that learn from data. It's often not obvious what values/settings one should choose.
 
 You might be tempted to suggest that we should try out many different values and see what works best. That is a fine idea and that's indeed what we will do, but this must be done very carefully. In particular, **we cannot use the test set for the purpose of tweaking hyperparameters**. Whenever you're designing Machine Learning algorithms, you should think of the test set as a very precious resource that should ideally never be touched until one time at the very end. Otherwise, the very real danger is that you may tune your hyperparameters to work well on the test set, but if you were to deploy your model you could see a significantly reduced performance. In practice, we would say that you **overfit** to the test set. Another way of looking at it is that if you tune your hyperparameters on the test set, you are effectively using the test set as the training set, and therefore the performance you achieve on it will be too optimistic with respect to what you might actually observe when you deploy your model. But if you only use the test set once at end, it remains a good proxy for measuring the **generalization** of your classifier (we will see much more discussion surrounding generalization later in the class).
 
@@ -221,19 +220,18 @@ for k in [1, 3, 5, 10, 20, 50, 100]:
   validation_accuracies.append((k, acc))
 ```
 
-By the end of this procedure, we could plot a graph that shows which values of *k* work best. We would then stick with this value and evaluate once on the actual test set.
+By the end of this procedure, we could plot a graph that shows which values of _k_ work best. We would then stick with this value and evaluate once on the actual test set.
 
 > Split your training set into training set and a validation set. Use validation set to tune all hyperparameters. At the end run a single time on the test set and report performance.
 
 **Cross-validation**.
-In cases where the size of your training data (and therefore also the validation data) might be small, people sometimes use a more sophisticated technique for hyperparameter tuning called **cross-validation**. Working with our previous example, the idea is that instead of arbitrarily picking the first 1000 datapoints to be the validation set and rest training set, you can get a better and less noisy estimate of how well a certain value of *k* works by iterating over different validation sets and averaging the performance across these. For example, in 5-fold cross-validation, we would split the training data into 5 equal folds, use 4 of them for training, and 1 for validation. We would then iterate over which fold is the validation fold, evaluate the performance, and finally average the performance across the different folds.
+In cases where the size of your training data (and therefore also the validation data) might be small, people sometimes use a more sophisticated technique for hyperparameter tuning called **cross-validation**. Working with our previous example, the idea is that instead of arbitrarily picking the first 1000 datapoints to be the validation set and rest training set, you can get a better and less noisy estimate of how well a certain value of _k_ works by iterating over different validation sets and averaging the performance across these. For example, in 5-fold cross-validation, we would split the training data into 5 equal folds, use 4 of them for training, and 1 for validation. We would then iterate over which fold is the validation fold, evaluate the performance, and finally average the performance across the different folds.
 
 <div class="fig figleft fighighlight">
   <img src="{{ site.baseurl }}/assets/cvplot.png">
   <div class="figcaption">Example of a 5-fold cross-validation run for the parameter <b>k</b>. For each value of <b>k</b> we train on 4 folds and evaluate on the 5th. Hence, for each <b>k</b> we receive 5 accuracies on the validation fold (accuracy is the y-axis, each result is a point). The trend line is drawn through the average of the results for each <b>k</b> and the error bars indicate the standard deviation. Note that in this particular case, the cross-validation suggests that a value of about <b>k</b> = 7 works best on this particular dataset (corresponding to the peak in the plot). If we used more than 5 folds, we might expect to see a smoother (i.e. less noisy) curve.</div>
   <div style="clear:both"></div>
 </div>
-
 
 **In practice**. In practice, people prefer to avoid cross-validation in favor of having a single validation split, since cross-validation can be computationally expensive. The splits people tend to use is between 50%-90% of the training data for training and rest for validation. However, this depends on multiple factors: For example if the number of hyperparameters is large you may prefer to use bigger validation splits. If the number of examples in the validation set is small (perhaps only a few hundred or so), it is safer to use cross-validation. Typical number of folds you can see in practice would be 3-fold, 5-fold or 10-fold cross-validation.
 
@@ -274,7 +272,7 @@ In summary:
 
 - We introduced the problem of **Image Classification**, in which we are given a set of images that are all labeled with a single category. We are then asked to predict these categories for a novel set of test images and measure the accuracy of the predictions.
 - We introduced a simple classifier called the **Nearest Neighbor classifier**. We saw that there are multiple hyper-parameters (such as value of k, or the type of distance used to compare examples) that are associated with this classifier and that there was no obvious way of choosing them.
--  We saw that the correct way to set these hyperparameters is to split your training data into two: a training set and a fake test set, which we call **validation set**. We try different hyperparameter values and keep the values that lead to the best performance on the validation set.
+- We saw that the correct way to set these hyperparameters is to split your training data into two: a training set and a fake test set, which we call **validation set**. We try different hyperparameter values and keep the values that lead to the best performance on the validation set.
 - If the lack of training data is a concern, we discussed a procedure called **cross-validation**, which can help reduce noise in estimating which hyperparameters work best.
 - Once the best hyperparameters are found, we fix them and perform a single **evaluation** on the actual test set.
 - We saw that Nearest Neighbor can get us about 40% accuracy on CIFAR-10. It is simple to implement but requires us to store the entire training set and it is expensive to evaluate on a test image.
@@ -293,7 +291,7 @@ If you wish to apply kNN in practice (hopefully not on images, or perhaps as onl
 3. Split your training data randomly into train/val splits. As a rule of thumb, between 70-90% of your data usually goes to the train split. This setting depends on how many hyperparameters you have and how much of an influence you expect them to have. If there are many hyperparameters to estimate, you should err on the side of having larger validation set to estimate them effectively. If you are concerned about the size of your validation data, it is best to split the training data into folds and perform cross-validation. If you can afford the computational budget it is always safer to go with cross-validation (the more folds the better, but more expensive).
 4. Train and evaluate the kNN classifier on the validation data (for all folds, if doing cross-validation) for many choices of **k** (e.g. the more the better) and across different distance types (L1 and L2 are good candidates)
 5. If your kNN classifier is running too long, consider using an Approximate Nearest Neighbor library (e.g. [FLANN](https://github.com/mariusmuja/flann)) to accelerate the retrieval (at cost of some accuracy).
-6. Take note of the hyperparameters that gave the best results. There is a question of whether you should use the full training set with the best hyperparameters, since the optimal hyperparameters might change if you were to fold the validation data into your training set (since the size of the data would be larger). In practice it is cleaner to not use the validation data in the final classifier and consider it to be *burned* on estimating the hyperparameters. Evaluate the best model on the test set. Report the test set accuracy and declare the result to be the performance of the kNN classifier on your data.
+6. Take note of the hyperparameters that gave the best results. There is a question of whether you should use the full training set with the best hyperparameters, since the optimal hyperparameters might change if you were to fold the validation data into your training set (since the size of the data would be larger). In practice it is cleaner to not use the validation data in the final classifier and consider it to be _burned_ on estimating the hyperparameters. Evaluate the best model on the test set. Report the test set accuracy and declare the result to be the performance of the kNN classifier on your data.
 
 <a name='reading'></a>
 
